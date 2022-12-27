@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="'欢迎你'+${who}"></p>
+<div id="refresh" th:fragment="refresh">
+    <details>
+        <summary>课程管理</summary>
+        <table>
+            <tr>
+                <td>课程名称</td>
+                <td>授课教师</td>
+                <td>操作</td>
+            </tr>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.cname}"></td>
+                <td th:text="${course.tname}"></td>
+                <td><a th:href="@{/admin/deletecourse(cname=${course.cname},who=${who})}">删除</a></td>
+            </tr>
+            <tr>
+                <form th:action="@{/admin/insertcourse(who=${who})}" method="post">
+                    <td><input name="cname" type="text"></td>
+                    <td><input name="tname" type="text"></td>
+                    <td><input name="+" type="submit"></td>
+                </form>
+            </tr>
+        </table>
+    </details>
+    <details>
+        <summary>教师管理</summary>
+        <table>
+            <tr>
+                <td>姓名</td>
+                <td>账号</td>
+                <td>密码</td>
+                <td>操作</td>
+            </tr>
+            <tr th:each="teacher : ${teachers}">
+                <td th:text="${teacher.name}"></td>
+                <td th:text="${teacher.account}"></td>
+                <td th:text="${teacher.password}"></td>
+                <td><a th:href="@{/admin/deleteuser(account=${teacher.account},who=${who})}">删除</a></td>
+            </tr>
+            <tr>
+                <form th:action="@{/admin/insertuser(who=${who},md=2)}" method="post">
+                    <td><input name="name" type="text"></td>
+                    <td><input name="account" type="text"></td>
+                    <td><input name="password" type="password"></td>
+                    <td><input name="+" type="submit"></td>
+                </form>
+            </tr>
+        </table>
+    </details>
+    <details>
+        <summary>学生管理</summary>
+        <table>
+            <tr>
+                <td>姓名</td>
+                <td>账号</td>
+                <td>密码</td>
+                <td>操作</td>
+            </tr>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.account}"></td>
+                <td th:text="${student.password}"></td>
+                <td><a th:href="@{/admin/deleteuser(account=${student.account},who=${who})}">删除</a></td>
+            </tr>
+            <tr>
+                <form th:action="@{/admin/insertuser(who=${who},md=3)}" method="post">
+                    <td><input name="name" type="text"></td>
+                    <td><input name="account" type="text"></td>
+                    <td><input name="password" type="password"></td>
+                    <td><input name="+" type="submit"></td>
+                </form>
+            </tr>
+        </table>
+    </details>
+</div>
+</body>
+<script>
+
+</script>
+</html>

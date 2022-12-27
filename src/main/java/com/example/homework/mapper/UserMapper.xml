@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.homework.mapper.UserMapper">
+    <select id="selectbyaccount" resultType="com.example.homework.bean.User" parameterType="String">
+        SELECT * from user where account = #{account}
+    </select>
+    <select id="selectallcourse" resultType="com.example.homework.bean.Course" >
+        select * from course
+    </select>
+    <delete id="deletecourse" parameterType="string" >
+        delete from course where cname = #{cname}
+    </delete>
+    <insert id="insertcourse" parameterType="com.example.homework.bean.Course">
+        insert into course (cname,tname) values (#{cname},#{tname})
+    </insert>
+    <select id="selectbymod" parameterType="int" resultType="com.example.homework.bean.User">
+        select * from user where md=#{md}
+    </select>
+    <insert id="insertuser" parameterType="com.example.homework.bean.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user (account,password,name,md) values (#{account},#{password},#{name},#{md})
+    </insert>
+    <delete id="deleteuser" parameterType="string" >
+        delete from user where account = #{account}
+    </delete>
+    <select id="selecybytname" parameterType="string" resultType="com.example.homework.bean.Course">
+        select * from course where tname=#{tname}
+    </select>
+    <select id="selectmyjob" parameterType="string" resultType="com.example.homework.bean.Job">
+        select * from job where cname=#{cname}
+    </select>
+    <insert id="insertjob" parameterType="com.example.homework.bean.Job">
+        insert into job (jname,cname,jobdetail) values (#{jname},#{cname},#{jobdetail})
+    </insert>
+    <delete id="deletjname" parameterType="string">
+        delete from job where jname=#{jname}
+    </delete>
+    <insert id="inserthomework" parameterType="com.example.homework.bean.Homework">
+        insert into homework (jname,cname,account,filename,score) values (#{jname},#{cname},#{account},#{filename},#{score})
+    </insert>
+    <select id="gethomework" parameterType="string" resultType="com.example.homework.bean.Homework">
+        select * from homework where account=#{account}
+    </select>
+    <select id="getallhomework" parameterType="string" resultType="com.example.homework.bean.Homework">
+        select * from homework where cname=#{cname}
+    </select>
+    <update id="givescore" >
+        update homework set score=#{score} where account=#{account} and jname=#{jname}
+    </update>
+</mapper>
